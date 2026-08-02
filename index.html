@@ -260,21 +260,21 @@
 
   <script>
     const disciplinas = [
-      { nome: "Fundamentos da Inteligência Artificial", mes: "06", ano: "2025", dataLimite: "06/2025", status: "Pendente", nota: "" },
-      { nome: "Liderança e Gestão de Equipes", mes: "08", ano: "2026", dataLimite: "08/2026", status: "Pendente", nota: "" },
-      { nome: "Finanças Corporativas", mes: "08", ano: "2026", dataLimite: "08/2026", status: "Pendente", nota: "" },
-      { nome: "Negociação e Administração de Conflitos", mes: "05", ano: "2026", dataLimite: "05/2026", status: "Pendente", nota: "" },
-      { nome: "Análise das Demonstrações Contábeis", mes: "05", ano: "2026", dataLimite: "05/2026", status: "Pendente", nota: "" },
-      { nome: "Gestão de Serviços", mes: "06", ano: "2026", dataLimite: "06/2026", status: "Pendente", nota: "" },
-      { nome: "Environmental Social and Corporate Governance", mes: "06", ano: "2026", dataLimite: "06/2026", status: "Pendente", nota: "" },
-      { nome: "Estratégias de Marketing", mes: "03", ano: "2026", dataLimite: "03/2026", status: "Pendente", nota: "" },
-      { nome: "Gestão de Projetos", mes: "03", ano: "2026", dataLimite: "03/2026", status: "Pendente", nota: "" },
-      { nome: "Empreendedorismo e Gestão da Inovação", mes: "02", ano: "2026", dataLimite: "02/2026", status: "Pendente", nota: "" },
-      { nome: "Estratégia Corporativa e de Negócios", mes: "02", ano: "2026", dataLimite: "02/2026", status: "Pendente", nota: "" },
-      { nome: "ARGo – Alternate Reality Goal", mes: "12", ano: "2025", dataLimite: "12/2025", status: "Pendente", nota: "" }
+      { nome: "Liderança e Gestão de Equipes", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },
+      { nome: "Finanças Corporativas", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },      
+      { nome: "Gestão de Serviços", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Pendente", nota: "" },
+      { nome: "Environmental Social and Corporate Governance", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Em Andamento", nota: "" },     
+      { nome: "Negociação e Administração de Conflitos", mes: "05", ano: "2026", dataLimite: "01/05/2026", status: "Concluído", nota: "10" },
+      { nome: "Análise das Demonstrações Contábeis", mes: "05", ano: "2026", dataLimite: "05/2026", status: "Concluído", nota: "10" },
+      { nome: "Estratégias de Marketing", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Concluído", nota: "9.8" },
+      { nome: "Gestão de Projetos", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Concluído", nota: "9.4" },
+      { nome: "Empreendedorismo e Gestão da Inovação", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Concluído", nota: "10" },
+      { nome: "Estratégia Corporativa e de Negócios", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Concluído", nota: "8.5" },
+      { nome: "Fundamentos da Inteligência Artificial", mes: "06", ano: "2025", dataLimite: "01/06/2025", status: "Concluído", nota: "10" },
+      { nome: "ARGo – Alternate Reality Goal", mes: "12", ano: "2025", dataLimite: "01/12/2025", status: "Concluído", nota: "9" }
     ];
 
-    const meses = { "02": "Fev", "03": "Mar", "05": "Mai", "06": "Jun", "08": "Ago", "12": "Dez" };
+    const meses = { "01": "Jan", "02": "Fev", "03": "Mar", "04": "Abr", "05": "Mai", "06": "Jun","07": "Jul", "08": "Ago", "09": "Set", "10": "Out", "11": "Nov", "12": "Dez" };
 
     function getStatusClass(status) {
       switch(status) {
