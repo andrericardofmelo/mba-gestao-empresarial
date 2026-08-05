@@ -108,7 +108,7 @@
     }
     .status-pendente { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
     .status-andamento { background: #dbeafe; color: #1e40af; border-color: #3b82f6; }
-    .status-concluido { background: #d1fae5; color: #065f46; border-color: #10b981; }
+    .status-aprovado { background: #d1fae5; color: #065f46; border-color: #10b981; }
     .status-reprovado { background: #fee2e2; color: #991b1b; border-color: #ef4444; }
     .nota-input {
       width: 65px;
@@ -217,7 +217,7 @@
           <option value="">Todos os Status</option>
           <option value="Pendente">Pendente</option>
           <option value="Em Andamento">Em Andamento</option>
-          <option value="Concluído">Concluído</option>
+          <option value="Aprovado">Aprovado</option>
           <option value="Reprovado">Reprovado</option>
         </select>
         <input type="text" id="searchNome" placeholder="🔍 Buscar disciplina..." style="min-width:190px;">
@@ -268,16 +268,16 @@
     const disciplinas = [
       { nome: "Liderança e Gestão de Equipes", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },
       { nome: "Finanças Corporativas", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },      
-      { nome: "Gestão de Serviços", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Pendente", nota: "" },
-      { nome: "Environmental Social and Corporate Governance", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Concluído", nota: "10" },     
-      { nome: "Negociação e Administração de Conflitos", mes: "05", ano: "2026", dataLimite: "01/05/2026", status: "Concluído", nota: "10" },
-      { nome: "Análise das Demonstrações Contábeis", mes: "05", ano: "2026", dataLimite: "05/2026", status: "Concluído", nota: "10" },
-      { nome: "Estratégias de Marketing", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Concluído", nota: "9.8" },
-      { nome: "Gestão de Projetos", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Concluído", nota: "9.4" },
-      { nome: "Empreendedorismo e Gestão da Inovação", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Concluído", nota: "10" },
-      { nome: "Estratégia Corporativa e de Negócios", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Concluído", nota: "8.5" },
-      { nome: "Fundamentos da Inteligência Artificial", mes: "06", ano: "2025", dataLimite: "01/06/2025", status: "Concluído", nota: "10" },
-      { nome: "ARGo – Alternate Reality Goal", mes: "12", ano: "2025", dataLimite: "01/12/2025", status: "Concluído", nota: "9" }
+      { nome: "Gestão de Serviços", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Em Andamento", nota: "" },
+      { nome: "Environmental Social and Corporate Governance", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Aprovado", nota: "10" },     
+      { nome: "Negociação e Administração de Conflitos", mes: "05", ano: "2026", dataLimite: "01/05/2026", status: "Aprovado", nota: "10" },
+      { nome: "Análise das Demonstrações Contábeis", mes: "05", ano: "2026", dataLimite: "05/2026", status: "Aprovado", nota: "10" },
+      { nome: "Estratégias de Marketing", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Aprovado", nota: "9.8" },
+      { nome: "Gestão de Projetos", mes: "03", ano: "2026", dataLimite: "01/03/2026", status: "Aprovado", nota: "9.4" },
+      { nome: "Empreendedorismo e Gestão da Inovação", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Aprovado", nota: "10" },
+      { nome: "Estratégia Corporativa e de Negócios", mes: "02", ano: "2026", dataLimite: "01/02/2026", status: "Aprovado", nota: "8.5" },
+      { nome: "Fundamentos da Inteligência Artificial", mes: "06", ano: "2025", dataLimite: "01/06/2025", status: "Aprovado", nota: "10" },
+      { nome: "ARGo – Alternate Reality Goal", mes: "12", ano: "2025", dataLimite: "01/12/2025", status: "Aprovado", nota: "9" }
     ];
 
     const meses = { "01": "Jan", "02": "Fev", "03": "Mar", "04": "Abr", "05": "Mai", "06": "Jun","07": "Jul", "08": "Ago", "09": "Set", "10": "Out", "11": "Nov", "12": "Dez" };
@@ -286,7 +286,7 @@
       switch(status) {
         case "Pendente": return "status-pendente";
         case "Em Andamento": return "status-andamento";
-        case "Concluído": return "status-concluido";
+        case "Aprovado": return "status-aprovado";
         case "Reprovado": return "status-reprovado";
         default: return "";
       }
@@ -301,7 +301,7 @@
       const tbody = document.getElementById("corpoTabela");
       tbody.innerHTML = "";
 
-      let count = 0, concluidos = 0, andamento = 0, pendentes = 0, somaNotas = 0, countNotas = 0;
+      let count = 0, aprovados = 0, andamento = 0, pendentes = 0, somaNotas = 0, countNotas = 0;
 
       disciplinas.forEach((d, i) => {
         if (filtroAno && d.ano !== filtroAno) return;
@@ -310,7 +310,7 @@
         if (busca && !d.nome.toLowerCase().includes(busca)) return;
 
         count++;
-        if (d.status === "Concluído") concluidos++;
+        if (d.status === "Aprovado") aprovados++;
         if (d.status === "Em Andamento") andamento++;
         if (d.status === "Pendente") pendentes++;
         if (d.nota && !isNaN(parseFloat(d.nota))) { somaNotas += parseFloat(d.nota); countNotas++; }
@@ -325,7 +325,7 @@
             <select class="status-select ${getStatusClass(d.status)}" onchange="atualizaStatus(${i}, this)">
               <option value="Pendente" ${d.status==="Pendente"?"selected":""}>Pendente</option>
               <option value="Em Andamento" ${d.status==="Em Andamento"?"selected":""}>Em Andamento</option>
-              <option value="Concluído" ${d.status==="Concluído"?"selected":""}>Concluído</option>
+              <option value="Aprovado" ${d.status==="Aprovado"?"selected":""}>Aprovado</option>
               <option value="Reprovado" ${d.status==="Reprovado"?"selected":""}>Reprovado</option>
             </select>
           </td>
@@ -339,7 +339,7 @@
       }
 
       document.getElementById("totalDisc").textContent = count;
-      document.getElementById("totalConc").textContent = concluidos;
+      document.getElementById("totalConc").textContent = aprovados;
       document.getElementById("totalAnda").textContent = andamento;
       document.getElementById("totalPend").textContent = pendentes;
       document.getElementById("mediaNotas").textContent = countNotas > 0 ? (somaNotas / countNotas).toFixed(1).replace(".", ",") : "—";
