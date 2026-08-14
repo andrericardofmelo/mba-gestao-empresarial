@@ -106,7 +106,7 @@
       font-weight: 500;
       transition: all 0.2s;
     }
-    .status-pendente { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
+    .status-Cursando { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
     .status-andamento { background: #dbeafe; color: #1e40af; border-color: #3b82f6; }
     .status-aprovado { background: #d1fae5; color: #065f46; border-color: #10b981; }
     .status-reprovado { background: #fee2e2; color: #991b1b; border-color: #ef4444; }
@@ -215,8 +215,8 @@
         </select>
         <select id="filterStatus">
           <option value="">Todos os Status</option>
-          <option value="Pendente">Pendente</option>
-          <option value="Em Andamento">Em Andamento</option>
+          <option value="Cursando">Cursando</option>
+          <option value="Aguardando Nota">Aguardando Nota</option>
           <option value="Aprovado">Aprovado</option>
           <option value="Reprovado">Reprovado</option>
         </select>
@@ -250,11 +250,11 @@
         <div class="summary-value" id="totalConc" style="color:#059669;">0</div>
       </div>
       <div class="summary-card">
-        <div class="summary-label">Em Andamento</div>
+        <div class="summary-label">Aguardando Nota</div>
         <div class="summary-value" id="totalAnda" style="color:#2563eb;">0</div>
       </div>
       <div class="summary-card">
-        <div class="summary-label">Pendentes</div>
+        <div class="summary-label">Cursando</div>
         <div class="summary-value" id="totalPend" style="color:#d97706;">0</div>
       </div>
       <div class="summary-card">
@@ -266,8 +266,8 @@
 
   <script>
     const disciplinas = [
-      { nome: "Liderança e Gestão de Equipes", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },
-      { nome: "Finanças Corporativas", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Pendente", nota: "" },      
+      { nome: "Liderança e Gestão de Equipes", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Cursando", nota: "" },
+      { nome: "Finanças Corporativas", mes: "09", ano: "2026", dataLimite: "13/09/2026", status: "Aguardando Nota", nota: "" },      
       { nome: "Gestão de Serviços", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Aprovado", nota: "10" },
       { nome: "Environmental Social and Corporate Governance", mes: "08", ano: "2026", dataLimite: "02/08/2026", status: "Aprovado", nota: "10" },     
       { nome: "Negociação e Administração de Conflitos", mes: "05", ano: "2026", dataLimite: "01/05/2026", status: "Aprovado", nota: "10" },
@@ -284,8 +284,8 @@
 
     function getStatusClass(status) {
       switch(status) {
-        case "Pendente": return "status-pendente";
-        case "Em Andamento": return "status-andamento";
+        case "Cursando": return "status-Cursando";
+        case "Aguardando Nota": return "status-andamento";
         case "Aprovado": return "status-aprovado";
         case "Reprovado": return "status-reprovado";
         default: return "";
@@ -301,7 +301,7 @@
       const tbody = document.getElementById("corpoTabela");
       tbody.innerHTML = "";
 
-      let count = 0, aprovados = 0, andamento = 0, pendentes = 0, somaNotas = 0, countNotas = 0;
+      let count = 0, aprovados = 0, andamento = 0, Cursando = 0, somaNotas = 0, countNotas = 0;
 
       disciplinas.forEach((d, i) => {
         if (filtroAno && d.ano !== filtroAno) return;
@@ -311,8 +311,8 @@
 
         count++;
         if (d.status === "Aprovado") aprovados++;
-        if (d.status === "Em Andamento") andamento++;
-        if (d.status === "Pendente") pendentes++;
+        if (d.status === "Aguardando Nota") andamento++;
+        if (d.status === "Cursando") Cursando++;
         if (d.nota && !isNaN(parseFloat(d.nota))) { somaNotas += parseFloat(d.nota); countNotas++; }
 
         const tr = document.createElement("tr");
@@ -323,8 +323,8 @@
           <td class="center">${d.dataLimite}</td>
           <td class="center">
             <select class="status-select ${getStatusClass(d.status)}" onchange="atualizaStatus(${i}, this)">
-              <option value="Pendente" ${d.status==="Pendente"?"selected":""}>Pendente</option>
-              <option value="Em Andamento" ${d.status==="Em Andamento"?"selected":""}>Em Andamento</option>
+              <option value="Cursando" ${d.status==="Cursando"?"selected":""}>Cursando</option>
+              <option value="Aguardando Nota" ${d.status==="Aguardando Nota"?"selected":""}>Aguardando Nota</option>
               <option value="Aprovado" ${d.status==="Aprovado"?"selected":""}>Aprovado</option>
               <option value="Reprovado" ${d.status==="Reprovado"?"selected":""}>Reprovado</option>
             </select>
@@ -341,7 +341,7 @@
       document.getElementById("totalDisc").textContent = count;
       document.getElementById("totalConc").textContent = aprovados;
       document.getElementById("totalAnda").textContent = andamento;
-      document.getElementById("totalPend").textContent = pendentes;
+      document.getElementById("totalPend").textContent = Cursando;
       document.getElementById("mediaNotas").textContent = countNotas > 0 ? (somaNotas / countNotas).toFixed(1).replace(".", ",") : "—";
     }
 
